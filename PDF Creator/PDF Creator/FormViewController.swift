@@ -42,11 +42,12 @@ class FormViewController: UIViewController {
         if segue.identifier == "formToPreview" {
             guard
                 let vc = segue.destination as? PreviewViewController,
-                let title = titleTextField.text
+                let title = titleTextField.text,
+                let body = bodyTextView.text
             else { return }
             let pdfCreator = PDFCreator(
                 title: title,
-                body: "",
+                body: body,
                 image: UIImage(),
                 contact: ""
             )
