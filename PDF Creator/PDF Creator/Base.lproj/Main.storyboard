@@ -73,7 +73,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Preview"/>
                                 <connections>
                                     <action selector="onPreviewButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LBI-uM-yLj"/>
-                                    <segue destination="lZr-QL-Tbq" kind="show" id="0UO-ld-Q1K"/>
+                                    <segue destination="lZr-QL-Tbq" kind="show" identifier="formToPreview" id="0UO-ld-Q1K"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3lM-RU-202">

@@ -38,4 +38,11 @@ class FormViewController: UIViewController {
     @IBAction func onSelectImageButtonClick(_ sender: UIButton) {
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      if segue.identifier == "formToPreview" {
+        guard let vc = segue.destination as? PreviewViewController else { return }
+        let pdfCreator = PDFCreator()
+        vc.documentData = pdfCreator.createFlyer()
+      }
+    }
 }
