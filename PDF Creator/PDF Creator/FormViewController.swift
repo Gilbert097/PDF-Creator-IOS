@@ -39,10 +39,18 @@ class FormViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      if segue.identifier == "formToPreview" {
-        guard let vc = segue.destination as? PreviewViewController else { return }
-        let pdfCreator = PDFCreator()
-        vc.documentData = pdfCreator.createFlyer()
-      }
+        if segue.identifier == "formToPreview" {
+            guard
+                let vc = segue.destination as? PreviewViewController,
+                let title = titleTextField.text
+            else { return }
+            let pdfCreator = PDFCreator(
+                title: title,
+                body: "",
+                image: UIImage(),
+                contact: ""
+            )
+            vc.documentData = pdfCreator.createFlyer()
+        }
     }
 }

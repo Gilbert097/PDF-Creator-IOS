@@ -10,11 +10,29 @@ import PDFKit
 
 class PDFCreator {
     
+    let title: String
+    let body: String
+    let image: UIImage
+    let contactInfo: String
+
+    init(
+        title: String,
+        body: String,
+        image: UIImage,
+        contact: String
+    ) {
+      self.title = title
+      self.body = body
+      self.image = image
+      self.contactInfo = contact
+    }
+    
     func createFlyer() -> Data {
      
         let pdfMetaData = [
             kCGPDFContextCreator: "Flyer Builder",
-            kCGPDFContextAuthor: "raywenderlich.com"
+            kCGPDFContextAuthor: "raywenderlich.com",
+            kCGPDFContextTitle: title
         ]
         let format = UIGraphicsPDFRendererFormat()
         format.documentInfo = pdfMetaData as [String: Any]
@@ -29,13 +47,35 @@ class PDFCreator {
    
             context.beginPage()
 
-            let attributes = [
-                NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 72)
-            ]
-            let text = "I'm a PDF!"
-            text.draw(at: CGPoint(x: 0, y: 0), withAttributes: attributes)
+            _ = addTitle(pageRect: pageRect)
         }
         
         return data
+    }
+    
+    func addTitle(pageRect: CGRect) -> CGFloat {
+      
+      let titleFont = UIFont.systemFont(ofSize: 18.0, weight: .bold)
+      
+      let titleAttributes: [NSAttributedString.Key: Any] =
+        [NSAttributedString.Key.font: titleFont]
+      
+      let attributedTitle = NSAttributedString(
+        string: title,
+        attributes: titleAttributes
+      )
+      
+      let titleStringSize = attributedTitle.size()
+      
+      let titleStringRect = CGRect(
+        x: (pageRect.width - titleStringSize.width) / 2.0,
+        y: 36,
+        width: titleStringSize.width,
+        height: titleStringSize.height
+      )
+      
+      attributedTitle.draw(in: titleStringRect)
+      
+      return titleStringRect.origin.y + titleStringRect.size.height
     }
 }
