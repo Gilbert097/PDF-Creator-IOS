@@ -7,19 +7,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class FormViewController: UIViewController {
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var bodyTextView: UITextView!
-    @IBOutlet weak var selectImageLabel: UILabel!
     @IBOutlet weak var contactInfoTextView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         applyBorder(textView: bodyTextView)
         applyBorder(textView: contactInfoTextView)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(ViewController.tapFunction))
-        selectImageLabel.addGestureRecognizer(tap)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -35,11 +32,10 @@ class ViewController: UIViewController {
         
     }
     
-    @objc
-    func tapFunction(sender:UITapGestureRecognizer) {
-        print("tap working")
+    @IBAction func onPreviewButtonClick(_ sender: UIButton) {
     }
+    
+    @IBAction func onSelectImageButtonClick(_ sender: UIButton) {
+    }
+    
 }
-
-
-
