@@ -59,6 +59,14 @@ class PDFCreator {
                 textTop: imageBottom + 18.0,
                 context: context
             )
+            
+            let context = context.cgContext
+            drawTearOffs(
+                drawContext: context,
+                pageRect: pageRect,
+                tearOffY: pageRect.height * 4.0 / 5.0,
+                numberTabs: 8
+            )
         }
         
         return data
@@ -127,27 +135,56 @@ class PDFCreator {
     }
     
     func addImage(pageRect: CGRect, imageTop: CGFloat) -> CGFloat {
-      
-      let maxHeight = pageRect.height * 0.4
-      let maxWidth = pageRect.width * 0.8
-      
-      let aspectWidth = maxWidth / image.size.width
-      let aspectHeight = maxHeight / image.size.height
-      let aspectRatio = min(aspectWidth, aspectHeight)
-      
-      let scaledWidth = image.size.width * aspectRatio
-      let scaledHeight = image.size.height * aspectRatio
-      
-      let imageX = (pageRect.width - scaledWidth) / 2.0
         
-      let imageRect = CGRect(
-        x: imageX,
-        y: imageTop,
-        width: scaledWidth,
-        height: scaledHeight
-      )
-      
-      image.draw(in: imageRect)
-      return imageRect.origin.y + imageRect.size.height
+        let maxHeight = pageRect.height * 0.4
+        let maxWidth = pageRect.width * 0.8
+        
+        let aspectWidth = maxWidth / image.size.width
+        let aspectHeight = maxHeight / image.size.height
+        let aspectRatio = min(aspectWidth, aspectHeight)
+        
+        let scaledWidth = image.size.width * aspectRatio
+        let scaledHeight = image.size.height * aspectRatio
+        
+        let imageX = (pageRect.width - scaledWidth) / 2.0
+        
+        let imageRect = CGRect(
+            x: imageX,
+            y: imageTop,
+            width: scaledWidth,
+            height: scaledHeight
+        )
+        
+        image.draw(in: imageRect)
+        return imageRect.origin.y + imageRect.size.height
+    }
+    
+    func drawTearOffs(
+        drawContext: CGContext,
+        pageRect: CGRect,
+        tearOffY: CGFloat,
+        numberTabs: Int
+    ) {
+        
+        drawContext.saveGState()
+        drawContext.setLineWidth(2.0)
+        
+        drawContext.move(to: CGPoint(x: 0, y: tearOffY))
+        drawContext.addLine(to: CGPoint(x: pageRect.width, y: tearOffY))
+        drawContext.strokePath()
+        drawContext.restoreGState()
+        
+        drawContext.saveGState()
+        let dashLength = CGFloat(72.0 * 0.2)
+        drawContext.setLineDash(phase: 0, lengths: [dashLength, dashLength])
+        
+        let tabWidth = pageRect.width / CGFloat(numberTabs)
+        for tearOffIndex in 1..<numberTabs {
+            let tabX = CGFloat(tearOffIndex) * tabWidth
+            drawContext.move(to: CGPoint(x: tabX, y: tearOffY))
+            drawContext.addLine(to: CGPoint(x: tabX, y: pageRect.height))
+            drawContext.strokePath()
+        }
+        drawContext.restoreGState()
     }
 }
