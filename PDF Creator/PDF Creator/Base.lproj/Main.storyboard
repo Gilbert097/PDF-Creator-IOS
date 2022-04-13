@@ -74,9 +74,6 @@
                                             <rect key="frame" x="153" y="392" width="108" height="31"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title="Select Image"/>
-                                            <connections>
-                                                <action selector="onSelectImageButtonClick:" destination="d1q-6f-Fth" eventType="touchUpInside" id="sCj-0C-fcX"/>
-                                            </connections>
                                         </button>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.artframe" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XGG-Uy-OBo">
                                             <rect key="frame" x="67.666666666666686" y="432.66666666666674" width="279" height="199"/>
@@ -133,6 +130,7 @@
                                     <outlet property="bodyTextView" destination="H0H-Wm-c0d" id="AeE-eN-Mwd"/>
                                     <outlet property="contactInfoTextView" destination="qpR-zi-Ie0" id="Cen-MD-IT1"/>
                                     <outlet property="imageView" destination="XGG-Uy-OBo" id="7cY-Oa-CDz"/>
+                                    <outlet property="selectImageButton" destination="VyY-vl-xZw" id="F8Q-Tb-EHw"/>
                                     <outlet property="selectedImageView" destination="XGG-Uy-OBo" id="hLR-me-xp0"/>
                                     <outlet property="titleTextField" destination="0H8-RV-2Dl" id="AkY-If-HP6"/>
                                 </connections>

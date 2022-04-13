@@ -10,10 +10,12 @@ import UIKit
 class FormTableViewController: UITableViewController {
 
     var formCell = FormTableViewCell()
+    private var imagePickerViewController = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 800
+        imagePickerViewController.delegate = self
     }
 
     // MARK: - Table view data source
@@ -25,6 +27,7 @@ class FormTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? FormTableViewCell {
             self.formCell = cell
+            self.formCell.selectImageButton.addTarget(self, action: #selector(onSelectImageButtonClick), for: .touchUpInside)
             return cell
         }
         return formCell
@@ -50,5 +53,34 @@ class FormTableViewController: UITableViewController {
             vc.documentData = pdfCreator.createFlyer()
         }
     }
+    
+    func showMessage(
+        title: String,
+        message: String,
+        handler: ((UIAlertAction) -> Void)? = nil
+    ){
+        let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: handler)
+        alertViewController.addAction(okAction)
+        self.present(alertViewController, animated: true, completion: nil)
+    }
 
+}
+
+extension FormTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
+    ) {
+        
+        let originalImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        self.formCell.selectedImageView.image = originalImage
+        imagePickerViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func onSelectImageButtonClick() {
+        imagePickerViewController.sourceType = .savedPhotosAlbum
+        present(imagePickerViewController, animated: true, completion: nil)
+    }
 }

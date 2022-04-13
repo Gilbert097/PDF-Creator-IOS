@@ -13,6 +13,7 @@ class FormTableViewCell: UITableViewCell {
     @IBOutlet weak var bodyTextView: UITextView!
     @IBOutlet weak var contactInfoTextView: UITextView!
     @IBOutlet weak var selectedImageView: UIImageView!
+    @IBOutlet weak var selectImageButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,11 +28,6 @@ class FormTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
-    @IBAction func onSelectImageButtonClick(_ sender: UIButton) {
     }
     
     private func applyBorder(textView: UITextView) {
