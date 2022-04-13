@@ -67,6 +67,12 @@ class PDFCreator {
                 tearOffY: pageRect.height * 4.0 / 5.0,
                 numberTabs: 8
             )
+            
+            drawContactLabels(
+                drawContext: context,
+                pageRect: pageRect,
+                numberTabs: 8
+            )
         }
         
         return data
@@ -184,6 +190,41 @@ class PDFCreator {
             drawContext.move(to: CGPoint(x: tabX, y: tearOffY))
             drawContext.addLine(to: CGPoint(x: tabX, y: pageRect.height))
             drawContext.strokePath()
+        }
+        drawContext.restoreGState()
+    }
+    
+    func drawContactLabels(
+        drawContext: CGContext,
+        pageRect: CGRect,
+        numberTabs: Int
+    ) {
+        
+        let contactTextFont = UIFont.systemFont(ofSize: 10.0, weight: .regular)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        
+        let contactBlurbAttributes = [
+            NSAttributedString.Key.paragraphStyle: paragraphStyle,
+            NSAttributedString.Key.font: contactTextFont
+        ]
+        let attributedContactText = NSMutableAttributedString(
+            string: contactInfo,
+            attributes: contactBlurbAttributes
+        )
+        
+        let textHeight = attributedContactText.size().height
+        let tabWidth = pageRect.width / CGFloat(numberTabs)
+        let horizontalOffset = (tabWidth - textHeight) / 2.0
+        drawContext.saveGState()
+        
+        drawContext.rotate(by: -90.0 * CGFloat.pi / 180.0)
+        for tearOffIndex in 0...numberTabs {
+            let tabX = CGFloat(tearOffIndex) * tabWidth + horizontalOffset
+            
+            attributedContactText.draw(at: CGPoint(x: -pageRect.height + 5.0, y: tabX))
         }
         drawContext.restoreGState()
     }

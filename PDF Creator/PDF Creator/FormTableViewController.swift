@@ -43,13 +43,14 @@ class FormTableViewController: UITableViewController {
                 let vc = segue.destination as? PreviewViewController,
                 let title = self.formCell.titleTextField.text,
                 let body = self.formCell.bodyTextView.text,
+                let contact = self.formCell.contactInfoTextView.text,
                 let image = self.formCell.selectedImageView.image
             else { return }
             let pdfCreator = PDFCreator(
                 title: title,
                 body: body,
                 image: image,
-                contact: ""
+                contact: contact
             )
             vc.documentData = pdfCreator.createFlyer()
         }
