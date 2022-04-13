@@ -52,9 +52,11 @@ class PDFCreator {
                 context: context
             )
             
+            let imageBottom = addImage(pageRect: pageRect, imageTop: titleBottom + 18.0)
+            
             addBodyText(
                 pageRect: pageRect,
-                textTop: titleBottom + 36.0,
+                textTop: imageBottom + 18.0,
                 context: context
             )
         }
@@ -104,7 +106,6 @@ class PDFCreator {
         paragraphStyle.alignment = .natural
         paragraphStyle.lineBreakMode = .byWordWrapping
         
-        
         let textAttributes = [
             NSAttributedString.Key.paragraphStyle: paragraphStyle,
             NSAttributedString.Key.font: textFont
@@ -123,5 +124,30 @@ class PDFCreator {
         UIColor.orange.setFill()
         context.fill(textRect)
         attributedText.draw(in: textRect)
+    }
+    
+    func addImage(pageRect: CGRect, imageTop: CGFloat) -> CGFloat {
+      
+      let maxHeight = pageRect.height * 0.4
+      let maxWidth = pageRect.width * 0.8
+      
+      let aspectWidth = maxWidth / image.size.width
+      let aspectHeight = maxHeight / image.size.height
+      let aspectRatio = min(aspectWidth, aspectHeight)
+      
+      let scaledWidth = image.size.width * aspectRatio
+      let scaledHeight = image.size.height * aspectRatio
+      
+      let imageX = (pageRect.width - scaledWidth) / 2.0
+        
+      let imageRect = CGRect(
+        x: imageX,
+        y: imageTop,
+        width: scaledWidth,
+        height: scaledHeight
+      )
+      
+      image.draw(in: imageRect)
+      return imageRect.origin.y + imageRect.size.height
     }
 }
