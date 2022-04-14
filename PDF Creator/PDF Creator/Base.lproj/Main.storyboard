@@ -162,7 +162,7 @@
                     <navigationItem key="navigationItem" title="Preview" id="sN0-0H-z66">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.arrow.up" catalog="system" id="xZn-1q-9ts">
                             <connections>
-                                <action selector="onSharedButtonClick:" destination="lZr-QL-Tbq" id="gN4-XM-n3i"/>
+                                <action selector="onSharedButtonItemClick:" destination="lZr-QL-Tbq" id="9SO-2Q-xCz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

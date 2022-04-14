@@ -35,7 +35,7 @@ class PreviewViewController: UIViewController, PDFViewDelegate  {
         pdfView.frame = view.bounds
     }
     
-    @IBAction func onSharedButtonClick(_ sender: UIBarButtonItem) {
+    @IBAction func onSharedButtonItemClick(_ sender: UIBarButtonItem) {
         if let data = documentData {
             let vc = UIActivityViewController(
                 activityItems: [data],
