@@ -149,7 +149,7 @@
             </objects>
             <point key="canvasLocation" x="1957" y="-567"/>
         </scene>
-        <!--Title-->
+        <!--Preview-->
         <scene sceneID="ogt-iU-nOW">
             <objects>
                 <viewController id="lZr-QL-Tbq" customClass="PreviewViewController" customModule="PDF_Creator" customModuleProvider="target" sceneMemberID="viewController">
@@ -159,7 +159,7 @@
                         <viewLayoutGuide key="safeArea" id="Jvh-sp-vzc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="sN0-0H-z66">
+                    <navigationItem key="navigationItem" title="Preview" id="sN0-0H-z66">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.arrow.up" catalog="system" id="xZn-1q-9ts">
                             <connections>
                                 <action selector="onSharedButtonClick:" destination="lZr-QL-Tbq" id="gN4-XM-n3i"/>
