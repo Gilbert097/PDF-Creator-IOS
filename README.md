@@ -1,6 +1,6 @@
 # PDF-Creator-IOS
 
-Projeto criado baseado no artigo "Creating a PDF in Swift with PDFKit" de Bill Morefield.
+Projeto criado baseado no artigo "<i>Creating a PDF in Swift with PDFKit</i>" de <b>Bill Morefield</b>.
 
 A ideia do app é gerar um folheto PDF baseado nas entradas do usuário, e compartilhar com outros aplicativos iOS.
 
