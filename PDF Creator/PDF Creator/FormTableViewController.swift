@@ -8,7 +8,7 @@
 import UIKit
 
 class FormTableViewController: UITableViewController {
-
+    
     var formCell = FormTableViewCell()
     private var imagePickerViewController = UIImagePickerController()
     
@@ -17,13 +17,13 @@ class FormTableViewController: UITableViewController {
         tableView.rowHeight = 800
         imagePickerViewController.delegate = self
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int { 1 }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? FormTableViewCell {
             self.formCell = cell
@@ -36,6 +36,21 @@ class FormTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
     }
+    
+    func showMessage(
+        title: String,
+        message: String,
+        handler: ((UIAlertAction) -> Void)? = nil
+    ){
+        let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: handler)
+        alertViewController.addAction(okAction)
+        self.present(alertViewController, animated: true, completion: nil)
+    }
+    
+}
+
+extension FormTableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "formToPreview" {
@@ -56,17 +71,24 @@ class FormTableViewController: UITableViewController {
         }
     }
     
-    func showMessage(
-        title: String,
-        message: String,
-        handler: ((UIAlertAction) -> Void)? = nil
-    ){
-        let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: handler)
-        alertViewController.addAction(okAction)
-        self.present(alertViewController, animated: true, completion: nil)
+    override func shouldPerformSegue(withIdentifier identifier: String,
+                                     sender: Any?) -> Bool {
+        if
+            let title = self.formCell.titleTextField.text, !title.isEmpty,
+            let body = self.formCell.bodyTextView.text, !body.isEmpty,
+            let contact = self.formCell.contactInfoTextView.text, !contact.isEmpty,
+            let _ = self.formCell.selectedImageView.image {
+            return true
+        }
+        
+        showMessage(
+            title: "All Information Not Provided",
+            message: "You must supply all information to create a flyer."
+        )
+        
+        return false
     }
-
+    
 }
 
 extension FormTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -75,7 +97,6 @@ extension FormTableViewController: UIImagePickerControllerDelegate, UINavigation
         _ picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
     ) {
-        
         let originalImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         self.formCell.selectedImageView.image = originalImage
         imagePickerViewController.dismiss(animated: true, completion: nil)
@@ -86,3 +107,4 @@ extension FormTableViewController: UIImagePickerControllerDelegate, UINavigation
         present(imagePickerViewController, animated: true, completion: nil)
     }
 }
+

@@ -102,8 +102,12 @@ class PDFCreator {
             height: titleStringSize.height
         )
         
-        UIColor.red.setFill()
-        context.fill(titleStringRect)
+        /*applyColor(
+            context: context,
+            color: UIColor.red,
+            rect: titleStringRect
+        )*/
+        
         attributedTitle.draw(in: titleStringRect)
         
         return titleStringRect.origin.y + titleStringRect.size.height
@@ -135,9 +139,23 @@ class PDFCreator {
             width: pageRect.width - 20,
             height: pageRect.height - textTop - pageRect.height / 5.0
         )
-        UIColor.orange.setFill()
-        context.fill(textRect)
+      
+        /*applyColor(
+            context: context,
+            color: UIColor.orange,
+            rect: textRect
+        )*/
+        
         attributedText.draw(in: textRect)
+    }
+    
+    private func applyColor(
+        context: UIGraphicsPDFRendererContext,
+        color: UIColor,
+        rect: CGRect
+    ) {
+        color.setFill()
+        context.fill(rect)
     }
     
     func addImage(pageRect: CGRect, imageTop: CGFloat) -> CGFloat {
