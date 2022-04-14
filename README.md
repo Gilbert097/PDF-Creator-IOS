@@ -12,5 +12,5 @@ No processo foi possível aprender:
 <h1>Telas e Funções</h1>
 Formulário:
 <p align="center">
-  <img src="https://github.com/Gilbert097/PDF-Creator-IOS/blob/main/Images/Form-ScreenShot.png?raw=true" width="350" title="Imagem App">
+  <img src="https://github.com/Gilbert097/PDF-Creator-IOS/blob/97447e29c24bf557e45a83ed56d980dd485484ac/Images/Form-ScreenShot.png?raw=true" width="350" title="Imagem App">
 </p>
