@@ -67,7 +67,8 @@ extension FormTableViewController {
                 image: image,
                 contact: contact
             )
-            vc.documentData = pdfCreator.createFlyer()
+            //vc.documentData = pdfCreator.createFlyer()
+            vc.url = pdfCreator.createURLFlyer()
         }
     }
     
