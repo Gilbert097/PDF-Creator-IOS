@@ -9,6 +9,10 @@ No processo foi possível aprender:
 - Trabalhar com Core Text e Core Graphics.
 - Compartilhar o documento criado.
 
+<h1>Referência</h1>
+Artigo: "<i><a href="https://www.raywenderlich.com/4023941-creating-a-pdf-in-swift-with-pdfkit#toc-anchor-014" Creating a PDF in Swift with PDFKit</i>"</a>
+Por: <b>Bill Morefield</b>, 26 de agosto de 2019
+
 <h1>Telas e Funções</h1>
 Formulário:
 <p align="center">
