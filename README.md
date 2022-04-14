@@ -10,7 +10,7 @@ No processo foi possível aprender:
 - Compartilhar o documento criado.
 
 <h1>Referência</h1>
-Artigo: <a href="https://www.raywenderlich.com/4023941-creating-a-pdf-in-swift-with-pdfkit#toc-anchor-014"> "<i>Creating a PDF in Swift with PDFKit</i>"</a>
+Artigo: <a href="https://www.raywenderlich.com/4023941-creating-a-pdf-in-swift-with-pdfkit#toc-anchor-014"> "<i>Creating a PDF in Swift with PDFKit</i>"</a></br>
 Por: <b>Bill Morefield</b>, 26 de agosto de 2019
 
 <h1>Telas e Funções</h1>
